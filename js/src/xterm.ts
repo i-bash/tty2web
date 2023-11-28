@@ -81,12 +81,64 @@ export class Xterm {
     };
 
     setPreferences(value: object) {
+    var color = new Array(5);
+    var palette = new Array(16);
         Object.keys(value).forEach((key) => {
-           if (key == "EnableWebGL" && key) {
-               this.term.loadAddon(new WebglAddon());
-           }
+            if (key == "EnableWebGL" && key) {
+                this.term.loadAddon(new WebglAddon());
+            } else if (key == "font-size") {
+                this.term.setOption("fontSize", value[key])
+            } else if (key == "font-family") {
+                this.term.setOption("fontFamily", value[key])
+            } else if (key == "width") {
+                this.term.setOption("cols", value[key])
+            } else if (key == "height") {
+                this.term.setOption("rows", value[key])
+            } else if (key == "cursor-blink") {
+                this.term.setOption("cursorBlink", value[key])
+            } else if (key == "cursor-style") {
+                this.term.setOption("cursorStyle", value[key])
+            } else if (key == "scrollback-lines") {
+                this.term.setOption("scrollback", value[key])
+            } else if (key == "foreground-color") {
+	color[0] = value[key]
+            } else if (key == "background-color") {
+	color[1] = value[key]
+            } else if (key == "cursor-color") {
+	color[2] = value[key]
+            } else if (key == "cursor-accent") {
+	color[3] = value[key]
+            } else if (key == "selection-color") {
+	color[4] = value[key]
+            } else if (key == "color-palette-overrides") {
+	palette = value[key]
+            }
         });
-    };
+    this.term.setOption("theme", {
+	foreground:	color[0],
+	background:	color[1],
+	cursor:		color[2],
+	cursorAccent:	color[3],
+	selection:	color[4],
+	black:		palette[0],
+	red:		palette[1],
+	green:		palette[2],
+	yellow:		palette[3],
+	blue:		palette[4],
+	magenta:	palette[5],
+	cyan:		palette[6],
+	white:		palette[7],
+	brightBlack:	palette[8],
+	brightRed:	palette[9],
+	brightGreen:	palette[10],
+	brightYellow:	palette[11],
+	brightBlue:	palette[12],
+	brightMagenta:	palette[13],
+	brightCyan:	palette[14],
+	brightWhite:	palette[15]
+    })
+    }
+
 
     onInput(callback: (input: string) => void) {
         this.term.onData(data => {

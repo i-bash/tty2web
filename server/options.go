@@ -120,4 +120,8 @@ type HtermPrefernces struct {
 	SendEncoding                  string                       `hcl:"send_encoding" json:"send-encoding,omitempty"`
 	ShiftInsertPaste              bool                         `hcl:"shift_insert_paste" json:"shift-insert-paste,omitempty"`
 	UserCss                       string                       `hcl:"user_css" json:"user-css,omitempty"`
+    CursorStyle		string		`hcl:"cursor_style" json:"cursor-style,omitempty"`
+    ScrollbackLines		int		`hcl:"scrollback_lines" json:"scrollback-lines,omitempty"`
+    CursorAccent		string		`hcl:"cursor_accent" json:"cursor-accent,omitempty"`
+    SelectionColor		string		`hcl:"selection_color" json:"selection-color,omitempty"`
 }
